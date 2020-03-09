@@ -1,6 +1,30 @@
-html,body{
-    background: #CCCCCC;
+html,
+body {
+  background: #CCCCCC;
 }
-h4{
-    margin: 20px 0;
+
+h4 {
+  margin: 20px 0;
 }
+ul li {
+  padding: 5px 0;
+}
+
+/* Tooltip container */
+
+.tooltipbox {
+  position: relative;
+  display: inline-block;
+}
+.tooltipbox span {
+  margin-right: 5px;
+}
+.tooltipbox button {
+  padding: 0;
+  background-color: transparent;
+  box-shadow: none;
+  border: 0;
+}
+
+
+

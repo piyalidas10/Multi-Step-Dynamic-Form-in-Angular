@@ -6,19 +6,29 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  dataObj1: any;
-  dataObj2: any;
+  tooltipObj1: any;
+  tooltipObj2: any;
+  tooltipObj3: any;
+  tooltipObj4: any;
 
 
   ngOnInit() {
-    this.dataObj1 = {
-        heading: 'Modal Heading One',
+    this.tooltipObj1 = {
+        title: 'Tooltip Heading One',
         content: 'Lorem Ipsum is simply dummy text of the printing and <a href="#">typesetting industry</a>.'
     };
-    this.dataObj2 = {
-      heading: 'Modal Heading Two',
+    this.tooltipObj2 = {
+      title: 'Tooltip Heading Two',
       content: 'Lorem Ipsum is simply dummy text of the printing and <a href="#">typesetting industry</a>.'
-  };
+    };
+    this.tooltipObj3 = {
+      title: 'Tooltip Heading Three',
+      content: 'Lorem Ipsum is simply dummy text of the printing and <a href="#">typesetting industry</a>.'
+    };
+    this.tooltipObj4 = {
+      title: 'Tooltip Heading Four',
+      content: 'Lorem Ipsum is simply dummy text of the printing and <a href="#">typesetting industry</a>.'
+    };
   }
 
 }

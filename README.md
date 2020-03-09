@@ -1,285 +1,244 @@
-# Dynamically-Loaded-Bootstrap-Modal-Component-by-Angular-6
-Dynamically Loaded Bootstrap Modal Component by Angular 6
-#dynamic modal dialog # dynamic modal #display component dynamically #Modal directive #angular 6 modal component #angular 6 modal dialog
+# Tooltip-Component-Angular-6
+Dynamically Loaded Tooltip by Angular-6
 
-Create the application using the Angular CLI command.
+### Run the application
+```
+ng serve
+localhost:4200
+```
+    
 
-    ng new modal
-Update the index.html file to reference the Bootstrap Css - using the CDN.
+### App Component
+Four tooltips with four directions. Sending 3 inputs (tooltipDirection, title, tooltipData) to tooltip-box diective 
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+### app.component.html
 
-App Component
-Keep two buttons in app.componenet.html for loading two different modal popups.
-
-app.component.html
-
-    <div class="col-md-2">
-        <button type="button" 
-          class="btn btn-success  btn-block"
-          modal-box 
-          [title]='"Demo Modal 1"'
-          [componentData]="data1"
-          [componentName]="'Demo1Component'">
-          Demo Modal 1
-        </button>
-      </div>  
-
-      <div class="col-md-2">
-        <button type="button" 
-          class="btn btn-danger  btn-block"
-          modal-box 
-          [title]='"Demo Modal 2"'
-          [componentData]="data2"
-          [componentName]="'Demo2Component'">
-          Demo Modal 2
-        </button>
+    <div class="row">
+      <div class="col-12">
+        <ul role="list">
+          <li role="listitem">
+            <div class="tooltipbox">
+              <span>Tooltip Left side</span>
+              <button aria-haspopup="true" tooltip-box [tooltipDirection]="'left'" [title]="tooltipObj1.title" [tooltipData]="tooltipObj1.content">
+                <i class="fa fa-info-circle" aria-hidden="true"></i>
+                <span class="sr-only">{{tooltipObj1.title}}</span>
+              </button>
+            </div>
+          </li>
+          <li role="listitem">
+            <div class="tooltipbox">
+              <span>Tooltip Right side</span>
+              <button aria-haspopup="true" tooltip-box [tooltipDirection]="'right'" [title]="tooltipObj2.title" [tooltipData]="tooltipObj2.content">
+                <i class="fa fa-info-circle" aria-hidden="true"></i>
+                <span class="sr-only">{{tooltipObj2.title}}</span>
+              </button>
+            </div>
+          </li>
+          <li role="listitem">
+            <div class="tooltipbox">
+              <span>Tooltip Top side</span>
+              <button aria-haspopup="true" tooltip-box [tooltipDirection]="'top'" [title]="tooltipObj3.title" [tooltipData]="tooltipObj3.content">
+                <i class="fa fa-info-circle" aria-hidden="true"></i>
+                <span class="sr-only">{{tooltipObj3.title}}</span>
+              </button>
+            </div>
+          </li>
+          <li role="listitem">
+            <div class="tooltipbox">
+              <span>Tooltip Bottom side</span>
+              <button aria-haspopup="true" tooltip-box [tooltipDirection]="'bottom'" [title]="tooltipObj4.title" [tooltipData]="tooltipObj4.content">
+                <i class="fa fa-info-circle" aria-hidden="true"></i>
+                <span class="sr-only">{{tooltipObj4.title}}</span>
+              </button>
+            </div>
+          </li>
+        </ul>
       </div>
-    app.component.ts
+    </div>
 
-    export class AppComponent {
-      dataObj1: any;
-      dataObj2: any;
+
+### app.component.ts
+Have four object values for four tooltips with title and content
+
+    export class AppComponent implements OnInit {
+      tooltipObj1: any;
+      tooltipObj2: any;
+      tooltipObj3: any;
+      tooltipObj4: any;
 
 
       ngOnInit() {
-        this.dataObj1 = {
-            heading: 'Modal Heading One',
+        this.tooltipObj1 = {
+            title: 'Tooltip Heading One',
             content: 'Lorem Ipsum is simply dummy text of the printing and <a href="#">typesetting industry</a>.'
         };
-        this.dataObj2 = {
-          heading: 'Modal Heading Two',
+        this.tooltipObj2 = {
+          title: 'Tooltip Heading Two',
+          content: 'Lorem Ipsum is simply dummy text of the printing and <a href="#">typesetting industry</a>.'
+        };
+        this.tooltipObj3 = {
+          title: 'Tooltip Heading Three',
+          content: 'Lorem Ipsum is simply dummy text of the printing and <a href="#">typesetting industry</a>.'
+        };
+        this.tooltipObj4 = {
+          title: 'Tooltip Heading Four',
           content: 'Lorem Ipsum is simply dummy text of the printing and <a href="#">typesetting industry</a>.'
         };
       }
 
     }
-app.module.ts
+
+### app.module.ts
 
     import { BrowserModule } from '@angular/platform-browser';
     import { NgModule } from '@angular/core';
     import { HttpClientModule } from '@angular/common/http';
 
     import { AppComponent } from './app.component';
-    import { Demo1Component } from './demo1/demo1.component';
-    import { Demo2Component } from './demo2/demo2.component';
-    import { ModalDialogComponent } from './modal-dialog/modal-dialog.component';
-    import { ModalDirective } from './modal.directive';
-    import { DatacontainerDirective } from './modal-dialog/datacontainer.directive';
-    import { ComponentLoaderService } from './component-loader.service';
+    import { TooltipComponent } from './tooltip/tooltip.component';
+    import { TooltipDirective } from './tooltip.directive';
 
     @NgModule({
       declarations: [
         AppComponent,
-        Demo1Component,
-        Demo2Component,
-        ModalDialogComponent,
-        ModalDirective,
-        DatacontainerDirective
-      ],  
-      providers: [ComponentLoaderService],
+        TooltipDirective,
+        TooltipComponent
+      ],
+      providers: [],
       imports: [
         BrowserModule,
         HttpClientModule
       ],
       entryComponents: [
-        Demo1Component,
-        Demo2Component,
-        ModalDialogComponent
+        TooltipComponent
       ],
       bootstrap: [AppComponent]
     })
     export class AppModule { }
 
+
 entryComponent is used for components declaration which will be loaded dynamically.
 
-Modal Directive
-modal.directive.ts
-
-    import { Directive, Input, Output, EventEmitter, ElementRef, HostListener, Renderer2, ViewContainerRef, ComponentFactoryResolver } from '@angular/core';
-    import { ModalDialogComponent } from './modal-dialog/modal-dialog.component';
-
-    @Directive({
-      selector: '[modal-box]'
-    })
-    export class ModalDirective {
-      @Input() title: string;
-      @Input() componentData: string;
-      @Input() componentName: string;
-
-
-      @HostListener('click', ['$event'])
-
-      /* modal create */
-      openModal() {
-        this.createModalDialog(ModalDialogComponent);    
-      }
-
-      constructor(
-            private el: ElementRef,
-            private ren: Renderer2,
-            private viewContainer: ViewContainerRef,
-            private componentFactoryResolver: ComponentFactoryResolver
-      ) { }
-
-      ngOnInit() {
-      }
-
-      openModal() {
-        console.log('Modal directive is called.');
-        this.modalElement = this.el.nativeElement;
-        console.log('modalElement => ', this.modalElement);
-        this.ren.setAttribute(this.modalElement, 'tabindex', '0');
-        this.ren.setAttribute(this.modalElement, 'aria-haspopup', 'true');
-        this.createModalDialog(ModalDialogComponent);
-      }
-
-      createModalDialog(modalDialogComponent) {
-        console.log('CreateModalDialog is called');
-        this.viewContainer.clear();
-        const modalDialogComponentFactory = this.componentFactoryResolver.resolveComponentFactory(modalDialogComponent);
-        const modalDialogComponentRef = this.viewContainer.createComponent(modalDialogComponentFactory);
-        modalDialogComponentRef.instance['title'] = this.title;
-        modalDialogComponentRef.instance['componentData'] = this.componentData;
-        modalDialogComponentRef.instance['componentName'] = this.componentName;
-        modalDialogComponentRef.instance['close'].subscribe(event => {
-          if (event === 'close') {
-            console.log(this.el.nativeElement);
-            this.el.nativeElement.focus();
-          }
-        });
-        return modalDialogComponentRef;
-      }
-
-
-    }
-createModalDialog() function is used to create modal dialog componenet dynamically. You have to send modalDialogComponent through resolveComponenetFactory to create factory then will create component using createComponent function. We are fetching values of title, componentData, componentName from buttons which were declared in app.componenet.html. These value sends using modalDialogComponentRef.instance to modal-dialog.componenet.ts. 
-
-modalDialogComponentRef.instance['close'] ------ fetch close emitter emit value in modal directive using subscribe function which tells you that modal is closed now. if emit value is 'close' then focus will be shifted on the button.
-
-Modal Dialog Component
-modal-dialog.component.css
-
-    .modal{
-        display: block;
-    }
-modal-dialog.component.html
-
-    <!-- Modal -->
-    <!-- Modal -->
-      <div class="modal-box" #modalBox>
-        <div class="modal" role="dialog" tabindex="-1" aria-hidden="true">
-          <div class="modal-dialog" tabindex="0" role="dialog" [attr.aria-label]="title">
-            <!-- Modal content-->
-              <div class="modal-header">
-                <button type="button" aria-label="Close" tabindex="0" class="close" (click)="closeModal()">
-                  <span aria-hidden="true">&times;</span>
-                  <span class="sr-only">Close</span>
-                </button>
-                <h4 class="modal-title">{{ title }}</h4>
-              </div>
-              <div class="modal-body" tabindex="-1">
-                <div #datacontainer></div>
-              </div>
-          </div>
-        </div>
-
-
-modal-dialog.component.ts
+## Tooltip Directive
+### tooltip.directive.ts
 
     import {
-      Component, Input, OnInit, ComponentFactoryResolver, ViewContainerRef, ViewChild,
-      ElementRef, Renderer2, AfterContentInit, EventEmitter, Output, HostListener, OnChanges, AfterViewInit
+      Directive, Input, Output, EventEmitter, ElementRef,
+      HostListener, Renderer2, ViewContainerRef, ComponentFactoryResolver, OnInit, OnChanges
     } from '@angular/core';
-    import { ComponentLoaderService } from '../component-loader.service';
+    import { TooltipComponent } from './tooltip/tooltip.component';
 
-
-    @Component({
-      selector: 'modal-dialog',
-      templateUrl: './modal-dialog.component.html',
-      styleUrls: ['./modal-dialog.component.css']
+    @Directive({
+      selector: '[tooltip-box]'
     })
-
-    export class ModalDialogComponent implements OnInit, AfterContentInit, AfterViewInit {
+    export class TooltipDirective implements OnInit, OnChanges {
+      @Input() tooltipDirection: string;
       @Input() title: string;
-      @Input() componentData: string;
-      @Input() componentName: any;
-      @Output() close = new EventEmitter<any>();
-      public name: any;
-      public overlayDiv: any;
-
-      @ViewChild('datacontainer', { read: ViewContainerRef }) entry: ViewContainerRef;
+      @Input() tooltipData: string;
+      tooltipElement: any;
+      tooltipComponentRef: any;
 
       constructor(
         private el: ElementRef,
         private ren: Renderer2,
         private viewContainer: ViewContainerRef,
-        private resolver: ComponentFactoryResolver,
-        private loaderService :ComponentLoaderService
-      ) {}
-
-      public div = this.ren.createElement('div'); 
+        private componentFactoryResolver: ComponentFactoryResolver
+      ) { }
 
       ngOnInit() {
-          console.log('Modal Component is called.');
-        }
+      }
 
-        ngAfterContentInit() {
-          this.ren.addClass(this.el.nativeElement.ownerDocument.body, 'modal-open');
-          this.ren.insertBefore(this.el.nativeElement.children[0], this.div, this.el.nativeElement.children[0].children[0]);
-          this.ren.setAttribute(this.div , 'class', 'modal-backdrop fade in');
-          this.ren.setAttribute(this.div , 'tabindex', '-1');
-          this.createModalPopup();
-          console.log(this.el.nativeElement.children[0]);
-        }
+      ngOnChanges() {
+      }
 
-        ngAfterViewInit() {
-          this.ren.listen(this.overlayDiv, 'click', (event) => {
-            this.closeModal();
-          });
-          this.ren.listen(this.el.nativeElement, 'keydown', (event) => {
-            console.log('event keydown => ', event);
-            if (event.keyCode === 27 || event.key === 'Escape' || event.which === 27) { // ESCAPE key from keyboard
-              this.closeModal();
-              event.preventDefault();
-            }
-          });
-        }
+      @HostListener('mouseover', ['$event'])
+      mouseOver() {
+        this.openTooltip();
+      }
 
-        createModalPopup() {
-          console.log('createModalPopup is called.');
-          const name = this.loaderService.getComponent(this.componentName);
-          console.log('Component Name => ', name);
-          const myFactory = this.resolver.resolveComponentFactory(<any>name);
-          const myRef = this.entry.createComponent(myFactory);
-          myRef.instance['data'] = this.componentData;
-          this.overlayDiv = this.el.nativeElement.children[0];
-          console.log('overlayDiv => ', this.el.nativeElement.children[0]);
-          this.setFocus();
-        }
 
-        setFocus() {
-          const focusDiv = this.el.nativeElement.children[0].children[1].children[0];
-          console.log('focusDiv => ', focusDiv);
-          focusDiv.focus();
-        }
+      @HostListener('mouseout', ['$event'])
+      mouseOut() {
+        this.closeTooltip();
+      }
 
-        closeModal() {
-          this.ren.removeClass(this.el.nativeElement.ownerDocument.body, 'modal-open');
-          this.el.nativeElement.remove();
-          this.close.emit('close');
-        }
+      @HostListener('focus', ['$event'])
+      focusMove() {
+        this.openTooltip();
+      }
+
+      @HostListener('blur', ['$event'])
+      focusOut() {
+        this.closeTooltip();
+      }
+
+      /* tooltip create */
+      openTooltip() {
+        console.log('Tooltip directive is called.');
+        this.tooltipElement = this.el.nativeElement;
+        this.ren.setAttribute(this.tooltipElement, 'tabindex', '0');
+        this.ren.setAttribute(this.tooltipElement, 'aria-haspopup', 'true');
+        console.log('tooltipElement => ', this.tooltipElement);
+        this.createtooltipDialog(TooltipComponent);
+      }
+
+      createtooltipDialog(comp) {
+        console.log('CreatetooltipDialog is called');
+        this.viewContainer.clear();
+        const TooltipComponentFactory = this.componentFactoryResolver.resolveComponentFactory(comp);
+        this.tooltipComponentRef = this.viewContainer.createComponent(TooltipComponentFactory);
+        this.tooltipComponentRef.instance['tooltipDirection'] = this.tooltipDirection;
+        this.tooltipComponentRef.instance['title'] = this.title;
+        this.tooltipComponentRef.instance['tooltipData'] = this.tooltipData;
+        return this.tooltipComponentRef;
+      }
+
+      closeTooltip() {
+        this.tooltipComponentRef.destroy();
+      }
 
 
     }
 
-this.ren.addClass is used to add 'modal-open' class on creating modal-dialog. this.ren.appendChild is used append div in body. this.ren.setAttribute is used to add class name 'modal-backdrop fade in' in div which shows when modal-dialog opens for overlay. 
-ren.listen is used to listen the event which was fired.
+@HostListener() function decorator allows you to handle events of the host element in the tooltip directive. 
+1.  @HostListener('mouseover', ['$event']) ----- when you hover you mouse over the host element, tooltip component will be created by using openTooltip().
+2.  @HostListener('mouseout', ['$event']) ----- when you hover you mouse out the host element, tooltip component will be closed by using closeTooltip().
+3.  @HostListener('focus', ['$event']) ----- when you focus on the host element, tooltip component will be created by using openTooltip().
+4.  @HostListener('blur', ['$event']) ----- when you focus out the host element, tooltip component will be closed by using closeTooltip().
 
-this.createModalPopup() is called for loading component dynamically. Component is coming from buttons of app.componenet.html page and this.componentName is used to hold componenent name. loaderService is used to pass a component according to the component name. That component is passing to the resolveComponentFactory, createComponent function to create the component accordingly. We are passing the componentData using myRef.instance['data'] to component like demo1 or demo2.
 
-That data is fetching from demo1 and demo2 component using @Input() and displaing it from html file.
+createtooltipDialog() function is used to create tooltip componenet dynamically. You have to send TooltipComponent through resolveComponenetFactory to create factory then will create component using createComponent function. We are fetching values of tooltipDirection, title, tooltipData from tooltipbox div which were declared in app.componenet.html. These value are sending using tooltipComponentRef.instance to tooltip.componenet.ts. 
 
-closeModal() is used to remove the modal. this.el.nativeElement.remove() is used to remove DOM element.
+closeTooltip() is used to destroy the tooltip component from DOM element.
+
+
+
+## Tooltip Component
+### tooltip.component.html
+
+    <div class="tooltiptext {{tooltipDirection}}"  role="tooltip" [innerHTML]="tooltipData">
+    </div>
+
+
+### tooltip.component.ts
+
+    import { Component, OnInit, Input } from '@angular/core';
+
+    @Component({
+      selector: 'app-tooltip',
+      templateUrl: './tooltip.component.html',
+      styleUrls: ['./tooltip.component.css']
+    })
+    export class TooltipComponent implements OnInit {
+      @Input() tooltipDirection: string;
+      @Input() title: string;
+      @Input() tooltipData: string;
+      constructor() { }
+
+      ngOnInit() {
+      }
+
+    }
+
+
+

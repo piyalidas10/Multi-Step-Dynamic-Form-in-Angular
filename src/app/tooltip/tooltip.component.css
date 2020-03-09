@@ -1,0 +1,95 @@
+/* Tooltip text */
+
+.tooltiptext {
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  font-size: 12px;
+  padding: 3px 5px;
+  text-align: center;
+  border-radius: 6px;
+  /* Position the tooltip text - see examples below! */
+  position: absolute;
+  z-index: 1;
+}
+
+/* Left Tooltip */
+
+.tooltiptext.left {
+  top: -5px;
+  right: 105%;
+}
+
+.tooltiptext.left::after {
+  content: " ";
+  position: absolute;
+  top: 14px;
+  left: 100%;
+  /* To the right of the tooltip */
+  margin-top: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent transparent black;
+}
+
+/* Right Tooltip */
+
+.tooltiptext.right {
+  top: -5px;
+  left: 105%;
+}
+
+.tooltiptext.right::after {
+  content: " ";
+  position: absolute;
+  top: 14px;
+  right: 100%;
+  /* To the left of the tooltip */
+  margin-top: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent black transparent transparent;
+}
+
+/* Top Tooltip */
+
+.tooltiptext.top {
+  bottom: 100%;
+  left: 50%;
+  margin-left: -60px;
+  /* Use half of the width (120/2 = 60), to center the tooltip */
+}
+
+.tooltiptext.top::after {
+  content: " ";
+  position: absolute;
+  top: 100%;
+  /* At the bottom of the tooltip */
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: black transparent transparent transparent;
+}
+
+/* Bottom Tooltip */
+
+.tooltiptext.bottom {
+  width: 120px;
+  top: 100%;
+  left: 50%;
+  margin-left: -60px;
+  /* Use half of the width (120/2 = 60), to center the tooltip */
+}
+
+.tooltiptext.bottom::after {
+  content: " ";
+  position: absolute;
+  bottom: 100%;
+  /* At the top of the tooltip */
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent black transparent;
+}

@@ -1,33 +1,49 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div class="container text-center">
+<div class="container">
   <h4 align="center">
-    Dynamically Loaded Bootstrap Modal Component by Angular-6
+    Dynamically Loaded Tooltip by Angular-6
   </h4>
 
-<div class="row">
-  <div class="col-md-2 col-md-offset-4">
-    <button type="button" 
-      class="btn btn-success  btn-block"
-      modal-box 
-      [title]='"Demo Modal 1"'
-      [componentData]="dataObj1"
-      [componentName]="'Demo1Component'">
-      Demo Modal 1
-    </button>
-  </div>  
+  <div class="row">
+    <div class="col-12">
+      <ul role="list">
+        <li role="listitem">
+          <div class="tooltipbox">
+            <span>Tooltip Left side</span>
+            <button aria-haspopup="true" tooltip-box [tooltipDirection]="'left'" [title]="tooltipObj1.title" [tooltipData]="tooltipObj1.content">
+              <i class="fa fa-info-circle" aria-hidden="true"></i>
+              <span class="sr-only">{{tooltipObj1.title}}</span>
+            </button>
+          </div>
+        </li>
+        <li role="listitem">
+          <div class="tooltipbox">
+            <span>Tooltip Right side</span>
+            <button aria-haspopup="true" tooltip-box [tooltipDirection]="'right'" [title]="tooltipObj2.title" [tooltipData]="tooltipObj2.content">
+              <i class="fa fa-info-circle" aria-hidden="true"></i>
+              <span class="sr-only">{{tooltipObj2.title}}</span>
+            </button>
+          </div>
+        </li>
+        <li role="listitem">
+          <div class="tooltipbox">
+            <span>Tooltip Top side</span>
+            <button aria-haspopup="true" tooltip-box [tooltipDirection]="'top'" [title]="tooltipObj3.title" [tooltipData]="tooltipObj3.content">
+              <i class="fa fa-info-circle" aria-hidden="true"></i>
+              <span class="sr-only">{{tooltipObj3.title}}</span>
+            </button>
+          </div>
+        </li>
+        <li role="listitem">
+          <div class="tooltipbox">
+            <span>Tooltip Bottom side</span>
+            <button aria-haspopup="true" tooltip-box [tooltipDirection]="'bottom'" [title]="tooltipObj4.title" [tooltipData]="tooltipObj4.content">
+              <i class="fa fa-info-circle" aria-hidden="true"></i>
+              <span class="sr-only">{{tooltipObj4.title}}</span>
+            </button>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
 
-  <div class="col-md-2">
-    <button type="button" 
-      class="btn btn-danger  btn-block"
-      modal-box 
-      [title]='"Demo Modal 2"'
-      [componentData]="dataObj2"
-      [componentName]="'Demo2Component'">
-      Demo Modal 2
-    </button>
-  </div>  
 </div>
-
-</div>
-
-
