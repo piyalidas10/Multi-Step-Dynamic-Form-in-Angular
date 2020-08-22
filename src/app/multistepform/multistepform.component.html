@@ -1,0 +1,25 @@
+<div class="multistep">
+  <div class="multistep-header" *ngIf="startingIndex < countSteps">
+    <ul class="form-heading">
+      <li *ngFor="let step of stepItems; let i = index" [class.active]="i === startingIndex" [class.completed]="i < startingIndex">
+        <span class="stepno">{{i+1}}</span>
+        <span class="steptitle">{{ stepItems[i] }}</span>
+      </li>
+    </ul>
+  </div>  
+  <div class="multistep-content">
+    <app-form *ngIf="stepItems && startingIndex < countSteps"
+    [countSteps]="countSteps"
+    [stepNo]="startingIndex"
+    [formFields]="data[startingIndex].formFields"
+    [formValues]="formValues"
+    [stepName]="data[startingIndex].stepname"
+    (formData)="getFormData($event)"
+    (newStep)="onnewStep($event)"
+    ></app-form>
+    <app-result
+    *ngIf="stepItems && startingIndex === countSteps"
+    [allFormsData]="allFormsData"
+    ></app-result>
+  </div>
+</div>

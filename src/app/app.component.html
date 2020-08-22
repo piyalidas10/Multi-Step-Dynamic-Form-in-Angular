@@ -1,49 +1,8 @@
 <div class="container">
   <h4 align="center">
-    Dynamically Loaded Tooltip by Angular-6
+    Multi Step Dynamic Form
   </h4>
 
-  <div class="row">
-    <div class="col-12">
-      <ul role="list">
-        <li role="listitem">
-          <div class="tooltipbox">
-            <span>Tooltip Left side</span>
-            <button aria-haspopup="true" tooltip-box [tooltipDirection]="'left'" [title]="tooltipObj1.title" [tooltipData]="tooltipObj1.content">
-              <i class="fa fa-info-circle" aria-hidden="true"></i>
-              <span class="sr-only">{{tooltipObj1.title}}</span>
-            </button>
-          </div>
-        </li>
-        <li role="listitem">
-          <div class="tooltipbox">
-            <span>Tooltip Right side</span>
-            <button aria-haspopup="true" tooltip-box [tooltipDirection]="'right'" [title]="tooltipObj2.title" [tooltipData]="tooltipObj2.content">
-              <i class="fa fa-info-circle" aria-hidden="true"></i>
-              <span class="sr-only">{{tooltipObj2.title}}</span>
-            </button>
-          </div>
-        </li>
-        <li role="listitem">
-          <div class="tooltipbox">
-            <span>Tooltip Top side</span>
-            <button aria-haspopup="true" tooltip-box [tooltipDirection]="'top'" [title]="tooltipObj3.title" [tooltipData]="tooltipObj3.content">
-              <i class="fa fa-info-circle" aria-hidden="true"></i>
-              <span class="sr-only">{{tooltipObj3.title}}</span>
-            </button>
-          </div>
-        </li>
-        <li role="listitem">
-          <div class="tooltipbox">
-            <span>Tooltip Bottom side</span>
-            <button aria-haspopup="true" tooltip-box [tooltipDirection]="'bottom'" [title]="tooltipObj4.title" [tooltipData]="tooltipObj4.content">
-              <i class="fa fa-info-circle" aria-hidden="true"></i>
-              <span class="sr-only">{{tooltipObj4.title}}</span>
-            </button>
-          </div>
-        </li>
-      </ul>
-    </div>
-  </div>
+  <app-multistepform [data]="data"></app-multistepform>
 
 </div>

@@ -10,16 +10,16 @@ ul li {
   padding: 5px 0;
 }
 
-/* Tooltip container */
+/* multistep container */
 
-.tooltipbox {
+.multistepbox {
   position: relative;
   display: inline-block;
 }
-.tooltipbox span {
+.multistepbox span {
   margin-right: 5px;
 }
-.tooltipbox button {
+.multistepbox button {
   padding: 0;
   background-color: transparent;
   box-shadow: none;

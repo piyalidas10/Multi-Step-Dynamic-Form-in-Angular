@@ -1,0 +1,55 @@
+.multistep-header{
+    text-align: center;
+}
+.form-heading {
+    list-style: none;
+    margin: 0 0 15px 0;
+    padding: 0;
+    display: inline-block;
+}
+.form-heading li {
+    display: inline-block;
+    padding: 10px;
+    min-width: 160px;
+    position: relative;
+}
+.form-heading li::after {
+    position: absolute;
+    left: 0;
+    top: 30px;
+    content: '';
+    width: 100%;
+    height: 3px;
+    background: #cccccc;
+}
+.form-heading li:first-child::after{
+    width: 100%;
+    left: 50%;
+}
+.form-heading li:last-child::after{
+    width: 50%;
+}
+.stepno {
+    background: #000000;
+    color: #ffffff;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    display: inline-block;
+    border-radius: 50%;
+    z-index: 1;
+    position: relative;
+}
+.steptitle{
+    display: block;
+    z-index: 1;
+    position: relative;
+    text-transform: capitalize;
+}
+.form-heading li.active .stepno, .form-heading li.active::after {
+    background: #FF0000;
+}
+.form-heading li.completed .stepno, .form-heading li.completed::after {
+    background: #28a745;
+}
