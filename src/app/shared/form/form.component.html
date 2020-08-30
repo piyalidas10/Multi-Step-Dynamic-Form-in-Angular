@@ -1,4 +1,4 @@
-<form [formGroup]="formName" #formDir="ngForm">
+<form [formGroup]="formName" #formDir="ngForm" appFocus (ngSubmit)="formDir.form.valid && submit(formDir)">
 <div class="row" *ngFor="let form of formFields; let i = index">
     <div class="col-12 form-group" *ngIf="form.input == 'text'">
       <label>{{form.key}}
@@ -90,8 +90,8 @@
       <button type="button" class="btn btn-default" [disabled]="stepNo === 0" (click)="gotoStep(stepNo-1)">Prev</button>
     </div>
     <div class="col-6 form-group text-right">
-      <button type="submit" *ngIf="stepNo !== countSteps - 1" class="btn btn-success" (click)="submitForm()">Next</button>
-      <button type="submit" *ngIf="stepNo === countSteps - 1" class="btn btn-success" (click)="submitForm()">Submit</button>
+      <button type="submit" *ngIf="stepNo !== countSteps - 1" class="btn btn-success">Next</button>
+      <button type="submit" *ngIf="stepNo === countSteps - 1" class="btn btn-success">Submit</button>
     </div>
   </div>
   </form>

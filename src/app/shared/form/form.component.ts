@@ -1,5 +1,5 @@
-import { Component, OnInit, Input, ElementRef, Output, EventEmitter, OnChanges } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators, ValidatorFn } from '@angular/forms';
+import { Component, OnInit, Input, ElementRef, Output, EventEmitter, OnChanges, Renderer2 } from '@angular/core';
+import { FormBuilder, FormGroup, FormControl, Validators, ValidatorFn, NgForm } from '@angular/forms';
 import {Formtype} from '../enums/Formtype';
 
 @Component({
@@ -17,7 +17,7 @@ export class FormComponent implements OnInit, OnChanges {
   formName: any;
   @Output() newStep = new EventEmitter<any>();
   gender = '1';
-  constructor(private el: ElementRef) { }
+  constructor(private el: ElementRef, private renderer: Renderer2) { }
 
   ngOnInit() {
   }
@@ -78,17 +78,12 @@ export class FormComponent implements OnInit, OnChanges {
     });
   }
 
-  submitForm() {
-    const invalidElements = this.el.nativeElement.querySelectorAll('.form-control.ng-invalid');
-    console.log('invalidElements => ', invalidElements);
-    if (invalidElements.length > 0) {
-      invalidElements[0].focus();
-    } else {
-      console.log('Form details => ', this.formName.value);
+  submit(myForm: NgForm) {
+    console.log('Form details => ', this.formName.value);
       const obj = Object.assign(this.formName.value, {'formName': this.stepName});
       this.formData.emit(obj);
       this.newStep.emit(this.stepNo + 1);
-    }
+      myForm.resetForm();
   }
 
   gotoStep(stepNo) {
