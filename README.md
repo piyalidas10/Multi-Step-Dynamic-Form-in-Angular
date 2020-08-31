@@ -170,7 +170,7 @@ Passing all details though the form component
 Dynamically form is generating regarding passsing values from multistepform component
 
 ```
-<form [formGroup]="formName" #formDir="ngForm">
+<form [formGroup]="formName" #formDir="ngForm" appFocus (ngSubmit)="formDir.form.valid && submit(formDir)">
 <div class="row" *ngFor="let form of formFields; let i = index">
     <div class="col-12 form-group" *ngIf="form.input == 'text'">
       <label>{{form.key}}
@@ -262,13 +262,78 @@ Dynamically form is generating regarding passsing values from multistepform comp
       <button type="button" class="btn btn-default" [disabled]="stepNo === 0" (click)="gotoStep(stepNo-1)">Prev</button>
     </div>
     <div class="col-6 form-group text-right">
-      <button type="submit" *ngIf="stepNo !== countSteps - 1" class="btn btn-success" (click)="submitForm()">Next</button>
-      <button type="submit" *ngIf="stepNo === countSteps - 1" class="btn btn-success" (click)="submitForm()">Submit</button>
+      <button type="submit" *ngIf="stepNo !== countSteps - 1" class="btn btn-success">Next</button>
+      <button type="submit" *ngIf="stepNo === countSteps - 1" class="btn btn-success">Submit</button>
     </div>
   </div>
   </form>
-
 ```
 
+### formDir.form.valid && submit(formDir) - form will be submitted when form is valid and button type should be submit.
+
+```
+submit(myForm: NgForm) {
+	    console.log('Form details => ', this.formName.value);
+	      const obj = Object.assign(this.formName.value, {'formName': this.stepName});
+	      this.formData.emit(obj);
+	      this.newStep.emit(this.stepNo + 1);
+	      myForm.resetForm();
+	  }
+```
+
+### submit function is calling while submitting the form. Form value is emitting to the multi step component and step no is increasing to emit also. With increasing step no, next form will be generated.
+createForm function is using to create the form with respective formName.
+
+```
+createForm() {
+	    this.formName = new FormGroup({});
+	    if (this.formName && Object.keys(this.formValues).length > 0) {
+	      console.log(this.formName);
+	      setTimeout(() => {
+	        this.formName.patchValue(this.formValues);
+	      }, );
+	    }
+	    this.validateForm();
+	  }
+```
+
+![Multi Step Dynamic Form in Angular](info.png)
+
+See in this image, for FirstName and LastName we are getting 3 validatorArr because from JSON data we are passing 3 valids array.
+
+### Creating this validation error checking functionality using the validateForm method,
+
+```
+validateForm() {
+    this.formFields.forEach(element => {
+      const validatorsArr: ValidatorFn[] = [];
+      if (element.valids.length > 0) {
+
+
+        element.valids.forEach(val => {
+          if (val.valid === 'required' || val.valid === 'email') {
+            validatorsArr.push(Validators[val.valid]);
+          }
+          if (val.valid === 'pattern') {
+            validatorsArr.push(
+              Validators.pattern(val.validator)
+            );
+         }
+         if (val.valid === 'minlength') {
+            validatorsArr.push(
+              Validators.minLength(val.length)
+            );
+          }
+        });
+
+
+        this.formName.addControl(element.key, new FormControl('', validatorsArr));
+      } else {
+        this.formName.addControl(element.key, new FormControl(''));
+      }
+      console.log('validatorsArr => ', validatorsArr);
+    });
+  }
+```
 
 
